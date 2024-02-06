@@ -31,8 +31,19 @@ public class Main {
         Subtask subtask4 = new Subtask("Купить плитку", "найти подешевле", Progress.NEW, 3);
         taskManager.updateSubTask(subtask4, 5);
 
-
+        System.out.println();
         System.out.println(taskManager.getSubTasksIdByEpicId(3));
         System.out.println(taskManager.getEpicsByIndex(3));
+        System.out.println();
+
+        taskManager.removeAllSubTasks();
+        System.out.println(taskManager.getListOfSubTasks());
+        System.out.println();
+
+        taskManager.removeAllEpics();
+
+
+
+        System.out.println(taskManager.getListOfEpics());
     }
 }

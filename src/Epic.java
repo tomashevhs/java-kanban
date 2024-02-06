@@ -6,6 +6,9 @@ public class Epic extends Task {
         subTasksId.add(sunTaskOd);
     }
 
+    public void removeAllSubTaskId () {
+        subTasksId.clear();
+    }
     public Epic(String title, String description, Progress status) {
         super(title, description, status);
     }

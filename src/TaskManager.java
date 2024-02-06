@@ -54,17 +54,34 @@ public class TaskManager {
     }
 
     public void removeAllSubTasks() {
+        for (Subtask subTask : allSubTask.values()) {
+            Epic epic = allEpics.get(subTask.getEpicId());
+            epic.removeAllSubTaskId();
+            System.out.println("SubTask удален.");
+        }
         allSubTask.clear();
         System.out.println("Все задачи удалены.");
     }
 
     public void removeAllEpics() {
-        allEpics.clear();
-        System.out.println("Все задачи удалены.");
+        ArrayList<Integer> epicIdList = new ArrayList<>();
+        for (int epicId : allEpics.keySet()) {
+            epicIdList.add(epicId);
+        }
+        for (int epicId : epicIdList) {
+            Epic epic = allEpics.get(epicId);
+            if (epic.subTasksId.isEmpty()) {
+                allEpics.remove(epicId);
+                System.out.println("Эпик удален.");
+            } else {
+                System.out.println("Не удалены все подзадачи.");
+            }
+        }
+        epicIdList.clear();
     }
 
     public Task getTasksByIndex(int taskId) {
-       return allTask.get(taskId);
+        return allTask.get(taskId);
     }
 
     public Subtask getSubTasksByIndex(int subTaskId) {
@@ -72,7 +89,7 @@ public class TaskManager {
     }
 
     public Epic getEpicsByIndex(int epicId) {
-      return allEpics.get(epicId);
+        return allEpics.get(epicId);
     }
 
     public ArrayList<Subtask> getSubTasksIdByEpicId(int epicId) {
@@ -95,7 +112,13 @@ public class TaskManager {
     }
 
     public void removeEpicsByIndex(int epicId) {
-        allEpics.remove(epicId);
+        Epic epic = allEpics.get(epicId);
+        if (epic.subTasksId.isEmpty()) {
+            allEpics.remove(epicId);
+        } else {
+            System.out.println("Не удалены все подзадачи");
+        }
+
     }
 
     public void updateTask(Task task, int taskId) {

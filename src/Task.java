@@ -1,10 +1,10 @@
 import java.util.Objects;
 
 public class Task {
-    private String title;
-    private String description;
-    private Integer id;
-    private Progress status;
+    protected String title;
+    protected String description;
+    protected Integer id;
+    protected Progress status;
 
 
     public Task(String title, String description, Progress status) {
@@ -46,31 +46,38 @@ public class Task {
     }
 
     @Override
-    public boolean equals(Object o) { // метод equals переопределён
+    public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Task task = (Task) o;
-        return Objects.equals(id, task.id);
+        return Objects.equals(title, task.title) && Objects.equals(description, task.description)
+                && Objects.equals(id, task.id) && Objects.equals(status, task.status);
     }
 
-    @Override // не забываем об аннотации
+    @Override
     public int hashCode() {
-        int hash = 17; // объявляем и инициализируем переменную hash
-        if (id != null) { // проверяем значение первого поля
-            hash = hash + id.hashCode();
+        int hash = 17;
+        if (title != null) {
+            hash = hash + title.hashCode();
         }
         hash = hash * 31;
-
-        return hash; // возвращаем хеш
+        if (description != null) {
+            hash = hash + description.hashCode();
+        }
+        if (id != null) {
+            hash = hash + id.hashCode();
+        }
+        if (status != null) {
+            hash = hash + status.hashCode();
+        }
+        return hash;
     }
-
-
 
     @Override
     public String toString() {
-        return "Название:'" + title + '\'' +
+        return "Task " + "{" + "Название:'" + title + '\'' +
                 ", описание:'" + description + '\'' +
                 ", id: '" + id + '\'' +
-                ", статус: '" + status + "'";
+                ", статус: '" + status + "'" + "}";
     }
 }

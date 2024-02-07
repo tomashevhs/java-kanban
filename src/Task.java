@@ -1,16 +1,17 @@
 import java.util.Objects;
 
 public class Task {
-    protected String title;
-    protected String description;
-    protected Integer id;
-    protected Progress status;
+    private String title;
+    private String description;
+    private Integer id;
+    private Progress status;
 
 
-    public Task(String title, String description, Progress status) {
+    public Task(String title, String description, Progress status, int id) {
         this.title = title;
         this.description = description;
         this.status = status;
+        this.id = id;
     }
 
     public String getTitle() {
@@ -75,7 +76,7 @@ public class Task {
 
     @Override
     public String toString() {
-        return "Task " + "{" + "Название:'" + title + '\'' +
+        return "Task: " + "{" + "Название:'" + title + '\'' +
                 ", описание:'" + description + '\'' +
                 ", id: '" + id + '\'' +
                 ", статус: '" + status + "'" + "}";

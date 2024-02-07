@@ -22,10 +22,10 @@ public class Main {
         System.out.println(taskManager.getListOfEpics() + "\n");
         System.out.println(taskManager.getListOfSubTasks() + "\n");
 
-
+taskManager.removeSubTasksByIndex(4);
 
         System.out.println(taskManager.getListOfEpics() + "\n");
-
+        System.out.println(taskManager.getListOfSubTasks() + "\n");
 
 
     }

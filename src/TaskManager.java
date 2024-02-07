@@ -104,7 +104,7 @@ public class TaskManager {
         allTask.remove(taskId);
     }
 
-    public void removeSubTasksByIndex(int subTaskId) {
+    public void removeSubTasksByIndex(Integer subTaskId) {
         Subtask subtask = allSubTask.get(subTaskId);
         int epicId = subtask.getEpicId();
         Epic epic = allEpics.get(epicId);

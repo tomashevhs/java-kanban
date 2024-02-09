@@ -57,7 +57,7 @@ public class TaskManager {
         for (Subtask subTask : allSubTask.values()) {
             Epic epic = allEpics.get(subTask.getEpicId());
             epic.removeAllSubTaskId();
-            epic.setStatus(Progress.NEW);
+            epic.setStatus(Status.NEW);
         }
         allSubTask.clear();
 
@@ -157,20 +157,20 @@ public class TaskManager {
 
         for (int idSubTask : epic.getSubTasksId()) {
             Subtask subTask = allSubTask.get(idSubTask);
-            if (subTask.getStatus() != Progress.NEW) {
+            if (subTask.getStatus() != Status.NEW) {
                 isAllNew = false;
             }
-            if (subTask.getStatus() != Progress.DONE) {
+            if (subTask.getStatus() != Status.DONE) {
                 isAllDone = false;
             }
         }
 
         if (isAllNew) {
-            epic.setStatus(Progress.NEW);
+            epic.setStatus(Status.NEW);
         } else if (!isAllDone && !isAllNew) {
-            epic.setStatus(Progress.IN_PROGRESS);
+            epic.setStatus(Status.IN_PROGRESS);
         } else {
-            epic.setStatus(Progress.DONE);
+            epic.setStatus(Status.DONE);
         }
     }
 

@@ -4,10 +4,10 @@ public class Task {
     private String title;
     private String description;
     private Integer id;
-    private Progress status;
+    private Status status;
 
 
-    public Task(String title, String description, Progress status, int id) {
+    public Task(String title, String description, Status status, int id) {
         this.title = title;
         this.description = description;
         this.status = status;
@@ -38,11 +38,11 @@ public class Task {
         this.id = id;
     }
 
-    public Progress getStatus() {
+    public Status getStatus() {
         return status;
     }
 
-    public void setStatus(Progress status) {
+    public void setStatus(Status status) {
         this.status = status;
     }
 

@@ -5,7 +5,7 @@ public class InMemoryHistoryManager implements HistoryManager {
     ArrayList<Task> viewedTasks = new ArrayList<>();
 
     @Override
-    public void add(Task task){
+    public void add(Task task) {
         if (viewedTasks.size() < 10) {
             viewedTasks.add(task);
         } else if (viewedTasks.size() == 10) {

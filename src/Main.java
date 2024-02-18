@@ -18,15 +18,25 @@ public class Main {
         manager.createSubTask(task5);
 
         manager.getTasksByIndex(1);
+
+        task1 = new Task("12", "12", Status.IN_PROGRESS, 0);
+        manager.updateTask(task1, 1);
+
+        manager.getTasksByIndex(1);
+
         manager.getTasksByIndex(2);
         manager.getEpicsByIndex(3);
         manager.getSubTasksByIndex(4);
         manager.getSubTasksByIndex(5);
 
+
+
+
+
         printAllTasks(manager);
     }
 
-    private static void printAllTasks(TaskManager manager) {
+    public static void printAllTasks(TaskManager manager) {
         System.out.println("Задачи:");
         for (Task task : manager.getListOfTasks()) {
             System.out.println(task);

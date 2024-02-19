@@ -1,3 +1,9 @@
+import Managers.Managers;
+import TaskManager.TaskManager;
+import Tasks.Epic;
+import Tasks.Subtask;
+import Tasks.Task;
+
 public class Main {
     public static void main(String[] args) {
         TaskManager manager = Managers.getDefault();
@@ -19,7 +25,7 @@ public class Main {
 
         manager.getTasksByIndex(1);
 
-        task1 = new Task("12", "12", Status.IN_PROGRESS, 0);
+        task1 = new Task("1", "1", Status.IN_PROGRESS, 0);
         manager.updateTask(task1, 1);
 
         manager.getTasksByIndex(1);

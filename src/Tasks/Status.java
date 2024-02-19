@@ -1,4 +1,4 @@
-package HistoryAndTaskManagers;
+package Tasks;
 
 public enum Status {
     NEW,

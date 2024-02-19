@@ -1,3 +1,8 @@
+import TaskManager.InMemoryTaskManager;
+import Tasks.Epic;
+import Tasks.Status;
+import Tasks.Subtask;
+import Tasks.Task;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -39,7 +44,7 @@ class InMemoryTaskManagerTest {
     }
 
     @Test
-        //Тест проверки равенства экземпляров Task с одинаковым Id
+        //Тест проверки равенства экземпляров Tasks.Task с одинаковым Id
     void addNewTask() {
         Task task = new Task("Test addNewTask", "Test addNewTask description", Status.NEW, 0);
         final int taskId = taskManager.createTask(task);
@@ -57,7 +62,7 @@ class InMemoryTaskManagerTest {
     }
 
     @Test
-        //Тест проверки равенства экземпляров Epic с одинаковым Id
+        //Тест проверки равенства экземпляров Tasks.Epic с одинаковым Id
     void addNewEpic() {
         Epic task2 = new Epic("Test addNewEpic", "Test addNewEpic description", Status.NEW, 0);
         final int taskId = taskManager.createEpic(task2);

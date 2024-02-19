@@ -1,3 +1,5 @@
+package Tasks;
+
 import java.util.Objects;
 
 public class Task {
@@ -75,7 +77,7 @@ public class Task {
 
     @Override
     public String toString() {
-        return "Task: " + "{" + "Название:'" + title + '\'' +
+        return "Tasks.Task: " + "{" + "Название:'" + title + '\'' +
                 ", описание:'" + description + '\'' +
                 ", id: '" + id + '\'' +
                 ", статус: '" + status + "'" + "}";

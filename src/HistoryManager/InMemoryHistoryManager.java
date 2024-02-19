@@ -1,17 +1,21 @@
+package HistoryAndTaskManagers;
+
+import Interfaces.HistoryManager;
+import Tasks.Task;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class InMemoryHistoryManager implements HistoryManager {
     ArrayList<Task> viewedTasks = new ArrayList<>();
+    static final int VIEWEDTASKS_CAPACITY = 10;
 
     @Override
     public void add(Task task) {
-        if (viewedTasks.size() < 10) {
-            viewedTasks.add(task);
-        } else if (viewedTasks.size() == 10) {
+        if (viewedTasks.size() == VIEWEDTASKS_CAPACITY) {
             viewedTasks.remove(0);
-            viewedTasks.add(task);
         }
+        viewedTasks.add(task);
     }
 
     @Override

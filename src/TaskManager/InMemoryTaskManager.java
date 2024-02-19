@@ -1,13 +1,23 @@
+package TaskManagers;
+
+import HistoryManager.InMemoryHistoryManager;
+import Tasks.Epic;
+import Tasks.Status;
+import Tasks.Subtask;
+import Tasks.Task;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import static Tasks.Status.DONE;
+
 public class InMemoryTaskManager implements TaskManager {
 
     private int id = 0;
-    HashMap<Integer, Task> allTask = new HashMap<>();
-    HashMap<Integer, Subtask> allSubTask = new HashMap<>();
-    HashMap<Integer, Epic> allEpics = new HashMap<>();
+    private final HashMap<Integer, Task> allTask = new HashMap<>();
+    private final HashMap<Integer, Subtask> allSubTask = new HashMap<>();
+    private final HashMap<Integer, Epic> allEpics = new HashMap<>();
     InMemoryHistoryManager inMemoryHistoryManager = (InMemoryHistoryManager) Managers.getDefaultHistory();
 
 
@@ -188,7 +198,7 @@ public class InMemoryTaskManager implements TaskManager {
             if (subTask.getStatus() != Status.NEW) {
                 isAllNew = false;
             }
-            if (subTask.getStatus() != Status.DONE) {
+            if (subTask.getStatus() != DONE) {
                 isAllDone = false;
             }
         }
@@ -198,7 +208,7 @@ public class InMemoryTaskManager implements TaskManager {
         } else if (!isAllDone && !isAllNew) {
             epic.setStatus(Status.IN_PROGRESS);
         } else {
-            epic.setStatus(Status.DONE);
+            epic.setStatus(DONE);
         }
     }
 

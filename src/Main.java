@@ -1,6 +1,7 @@
 import Managers.Managers;
 import TaskManager.TaskManager;
 import Tasks.Epic;
+import Tasks.Status;
 import Tasks.Subtask;
 import Tasks.Task;
 
@@ -26,6 +27,7 @@ public class Main {
         manager.getTasksByIndex(1);
 
         task1 = new Task("1", "1", Status.IN_PROGRESS, 0);
+        task1.setId(10);
         manager.updateTask(task1, 1);
 
         manager.getTasksByIndex(1);

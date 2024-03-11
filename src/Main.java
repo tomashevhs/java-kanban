@@ -31,11 +31,11 @@ public class Main {
         manager.updateTask(task1, 1);
 
         manager.getTasksByIndex(1);
-
-        manager.getTasksByIndex(2);
         manager.getEpicsByIndex(3);
-        manager.getSubTasksByIndex(4);
+        manager.getTasksByIndex(2);
         manager.getSubTasksByIndex(5);
+        manager.getSubTasksByIndex(4);
+
 
 
 

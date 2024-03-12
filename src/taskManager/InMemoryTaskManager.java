@@ -1,17 +1,17 @@
-package TaskManager;
+package taskManager;
 
-import HistoryManager.InMemoryHistoryManager;
-import Tasks.Epic;
-import Tasks.Status;
-import Tasks.Subtask;
-import Tasks.Task;
-import Managers.*;
+import historyManager.InMemoryHistoryManager;
+import tasks.Epic;
+import tasks.Status;
+import tasks.Subtask;
+import tasks.Task;
+import managers.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import static Tasks.Status.DONE;
+import static tasks.Status.DONE;
 
 public class InMemoryTaskManager implements TaskManager {
 

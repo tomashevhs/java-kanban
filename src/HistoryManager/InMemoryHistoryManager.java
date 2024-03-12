@@ -67,10 +67,10 @@ public class InMemoryHistoryManager implements HistoryManager {
 
     @Override
     public void add(Task task) {
-        if (idWithNode.containsKey(task.getId())){
+        if (idWithNode.containsKey(task.getId())) {
             removeNode(idWithNode.remove(task.getId()));
         }
-            linkLast(task);
+        linkLast(task);
     }
 
     @Override

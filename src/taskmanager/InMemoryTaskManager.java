@@ -1,6 +1,6 @@
-package taskManager;
+package taskmanager;
 
-import historyManager.InMemoryHistoryManager;
+import historymanager.InMemoryHistoryManager;
 import managers.Managers;
 import tasks.Epic;
 import tasks.Status;

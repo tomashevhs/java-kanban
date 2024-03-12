@@ -1,4 +1,4 @@
-import taskManager.InMemoryTaskManager;
+import taskmanager.InMemoryTaskManager;
 import tasks.Epic;
 import tasks.Status;
 import tasks.Subtask;

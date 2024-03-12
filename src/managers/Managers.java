@@ -1,9 +1,9 @@
 package managers;
 
-import historyManager.InMemoryHistoryManager;
-import taskManager.InMemoryTaskManager;
-import historyManager.HistoryManager;
-import taskManager.TaskManager;
+import historymanager.InMemoryHistoryManager;
+import taskmanager.InMemoryTaskManager;
+import historymanager.HistoryManager;
+import taskmanager.TaskManager;
 
 public class Managers {
 

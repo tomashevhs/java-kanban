@@ -10,12 +10,12 @@ import java.util.List;
 public class InMemoryHistoryManager implements HistoryManager {
     HashMap<Integer, Node<Task>> idWithNode = new HashMap<>();
 
-    static class Node<Task> {
-        public Task data;
-        public Node<Task> next;
-        public Node<Task> prev;
+    static class Node<T> {
+        public T data;
+        public Node<T> next;
+        public Node<T> prev;
 
-        public Node(Node<Task> prev, Task data, Node<Task> next) {
+        public Node(Node<T> prev, T data, Node<T> next) {
             this.data = data;
             this.next = next;
             this.prev = prev;
@@ -57,13 +57,13 @@ public class InMemoryHistoryManager implements HistoryManager {
     }
 
     public List<Task> getTask() {
-        ArrayList<Task> Tasks = new ArrayList<>();
+        ArrayList<Task> tasks = new ArrayList<>();
         Node<Task> currentNode = head;
         while (currentNode != null) {
-            Tasks.add(currentNode.data);
+            tasks.add(currentNode.data);
             currentNode = currentNode.next;
         }
-        return Tasks;
+        return tasks;
     }
 
     @Override

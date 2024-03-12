@@ -1,4 +1,4 @@
-import historymanager.InMemoryHistoryManager;
+import historyManager.InMemoryHistoryManager;
 import tasks.Status;
 import tasks.Task;
 import org.junit.jupiter.api.BeforeEach;

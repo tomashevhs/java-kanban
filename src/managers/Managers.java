@@ -11,10 +11,6 @@ public class Managers {
     }
 
     public static TaskManager getDefault() {
-        return getInMemoryTaskManager();
-    }
-
-    public static TaskManager getInMemoryTaskManager() {
         return new InMemoryTaskManager();
     }
 

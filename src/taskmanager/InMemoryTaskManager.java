@@ -1,12 +1,17 @@
-package taskManager;
 
-import historyManager.InMemoryHistoryManager;
+
+
+
+
+
+package taskmanager;
+
+import historymanager.InMemoryHistoryManager;
 import managers.Managers;
 import tasks.Epic;
 import tasks.Status;
 import tasks.Subtask;
 import tasks.Task;
-
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -21,6 +26,7 @@ public class InMemoryTaskManager implements TaskManager {
     private final HashMap<Integer, Subtask> allSubTask = new HashMap<>();
     private final HashMap<Integer, Epic> allEpics = new HashMap<>();
     InMemoryHistoryManager inMemoryHistoryManager = (InMemoryHistoryManager) Managers.getDefaultHistory();
+
 
     @Override
     public int createTask(Task task) {
@@ -136,6 +142,7 @@ public class InMemoryTaskManager implements TaskManager {
     @Override
     public void removeTasksByIndex(int taskId) {
         allTask.remove(taskId);
+        inMemoryHistoryManager.remove(taskId);
     }
 
     @Override
@@ -148,6 +155,7 @@ public class InMemoryTaskManager implements TaskManager {
         epic.setSubTasksId(subIds);
         allSubTask.remove(subTaskId);
         updateEpicStatus(epic);
+        inMemoryHistoryManager.remove(subTaskId);
     }
 
     @Override
@@ -161,6 +169,7 @@ public class InMemoryTaskManager implements TaskManager {
             }
             allEpics.remove(epicId);
         }
+        inMemoryHistoryManager.remove(epicId);
     }
 
     @Override
@@ -223,7 +232,5 @@ public class InMemoryTaskManager implements TaskManager {
         return id;
     }
 }
-
-
 
 

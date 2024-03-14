@@ -8,19 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 
 public class InMemoryHistoryManager implements HistoryManager {
-    HashMap<Integer, Node<Task>> idWithNode = new HashMap<>();
-
-    static class Node<T> {
-        public T data;
-        public Node<T> next;
-        public Node<T> prev;
-
-        public Node(Node<T> prev, T data, Node<T> next) {
-            this.data = data;
-            this.next = next;
-            this.prev = prev;
-        }
-    }
+   private final HashMap<Integer, Node<Task>> idWithNode = new HashMap<>();
 
     private Node<Task> head;
 
@@ -83,5 +71,17 @@ public class InMemoryHistoryManager implements HistoryManager {
     public void remove(int id) {
         removeNode(idWithNode.get(id));
         idWithNode.remove(id);
+    }
+
+    static class Node<T> {
+        public T data;
+        public Node<T> next;
+        public Node<T> prev;
+
+        public Node(Node<T> prev, T data, Node<T> next) {
+            this.data = data;
+            this.next = next;
+            this.prev = prev;
+        }
     }
 }

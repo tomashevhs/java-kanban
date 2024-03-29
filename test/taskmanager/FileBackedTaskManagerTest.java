@@ -1,11 +1,30 @@
-import managers.Managers;
-import taskmanager.FileBackedTaskManager;
-import taskmanager.TaskManager;
+package taskmanager;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import tasks.*;
 
-public class Main {
-    public static void main(String[] args) {
+import java.io.File;
+import java.io.IOException;
 
+import static org.junit.jupiter.api.Assertions.*;
+
+class FileBackedTaskManagerTest {
+
+    FileBackedTaskManager fileBackedTaskManager;
+
+    @BeforeEach
+    void beforeEach() {
+        fileBackedTaskManager = new FileBackedTaskManager();
+        try {
+            File tempFile = File.createTempFile("sprint7.csv", null);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Test
+    void save() {
         FileBackedTaskManager fileBackedTaskManager =  new FileBackedTaskManager();
         Task task1 = new Task(TasksType.TASK,"1", "1", Status.NEW, 0);
         fileBackedTaskManager.createTask(task1);
@@ -32,37 +51,10 @@ public class Main {
 
         fileBackedTaskManager.getTasksByIndex(2);
         fileBackedTaskManager.getEpicsByIndex(3);
-        fileBackedTaskManager.getSubTasksByIndex(4);
-        fileBackedTaskManager.getSubTasksByIndex(5);
-
-
-
-
-
-
     }
 
-    public static void printAllTasks(TaskManager manager) {
-        System.out.println("Задачи:");
-        for (Task task : manager.getListOfTasks()) {
-            System.out.println(task);
-        }
-        System.out.println("Эпики:");
-        for (Task epic : manager.getListOfEpics()) {
-            System.out.println(epic);
+    @Test
+    void loadFromFile() {
 
-            for (Task task : manager.getSubTasksIdByEpicId(epic.getId())) {
-                System.out.println("--> " + task);
-            }
-        }
-        System.out.println("Подзадачи:");
-        for (Task subtask : manager.getListOfSubTasks()) {
-            System.out.println(subtask);
-        }
-
-        System.out.println("История:");
-        for (Task task : manager.getHistory()) {
-            System.out.println(task);
-        }
     }
 }

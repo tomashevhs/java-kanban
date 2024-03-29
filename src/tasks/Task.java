@@ -3,12 +3,14 @@ package tasks;
 import java.util.Objects;
 
 public class Task {
+    private TasksType type;
     private String title;
     private String description;
     private Integer id;
     private Status status;
 
-    public Task(String title, String description, Status status, int id) {
+    public Task(TasksType type, String title, String description, Status status, int id) {
+        this.type = type;
         this.title = title;
         this.description = description;
         this.status = status;
@@ -45,6 +47,14 @@ public class Task {
 
     public void setStatus(Status status) {
         this.status = status;
+    }
+
+    public TasksType getType() {
+        return type;
+    }
+
+    public void setType(TasksType type) {
+        this.type = type;
     }
 
     @Override

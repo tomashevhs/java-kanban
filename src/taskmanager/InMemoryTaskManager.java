@@ -15,10 +15,10 @@ import static tasks.Status.DONE;
 
 public class InMemoryTaskManager implements TaskManager {
 
-    private int id = 0;
-    private final HashMap<Integer, Task> allTask = new HashMap<>();
-    private final HashMap<Integer, Subtask> allSubTask = new HashMap<>();
-    private final HashMap<Integer, Epic> allEpics = new HashMap<>();
+    protected int id = 0;
+    protected final HashMap<Integer, Task> allTask = new HashMap<>();
+    protected final HashMap<Integer, Subtask> allSubTask = new HashMap<>();
+    protected final HashMap<Integer, Epic> allEpics = new HashMap<>();
     InMemoryHistoryManager inMemoryHistoryManager = (InMemoryHistoryManager) Managers.getDefaultHistory();
 
 
@@ -110,18 +110,20 @@ public class InMemoryTaskManager implements TaskManager {
     }
 
     @Override
+    public Epic getEpicsByIndex(int epicId) {
+        Epic epic = allEpics.get(epicId);
+        inMemoryHistoryManager.add(epic);
+        return epic;
+    }
+
+    @Override
     public Subtask getSubTasksByIndex(int subTaskId) {
         Subtask subTask = allSubTask.get(subTaskId);
         inMemoryHistoryManager.add(subTask);
         return subTask;
     }
 
-    @Override
-    public Epic getEpicsByIndex(int epicId) {
-        Epic epic = allEpics.get(epicId);
-        inMemoryHistoryManager.add(epic);
-        return epic;
-    }
+
 
     @Override
     public ArrayList<Subtask> getSubTasksIdByEpicId(int epicId) {

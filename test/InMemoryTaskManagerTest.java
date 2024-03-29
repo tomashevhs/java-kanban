@@ -1,8 +1,5 @@
 import taskmanager.InMemoryTaskManager;
-import tasks.Epic;
-import tasks.Status;
-import tasks.Subtask;
-import tasks.Task;
+import tasks.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -21,19 +18,20 @@ class InMemoryTaskManagerTest {
     @Test
         //Тест проверки создания задач и поиска их по id
     void addAllTasks() {
-        Task task1 = new Task("1", "1", Status.NEW, 0);
+
+        Task task1 = new Task(TasksType.TASK,"1", "1", Status.NEW, 0);
         taskManager.createTask(task1);
 
-        Task task2 = new Task("2", "2", Status.IN_PROGRESS, 0);
+        Task task2 = new Task(TasksType.TASK, "2", "2", Status.IN_PROGRESS, 0);
         taskManager.createTask(task2);
 
-        Epic task3 = new Epic("epic3", "2", Status.NEW, 0);
+        Epic task3 = new Epic(TasksType.EPIC,"epic3", "2", Status.NEW, 0);
         taskManager.createEpic(task3);
 
-        Subtask task4 = new Subtask("sub4", "sub4", Status.NEW, 3, 0);
+        Subtask task4 = new Subtask(TasksType.SUBTASK, "sub4", "sub4", Status.NEW, 3, 0);
         taskManager.createSubTask(task4);
 
-        Subtask task5 = new Subtask("sub5", "sub5", Status.IN_PROGRESS, 3, 0);
+        Subtask task5 = new Subtask(TasksType.SUBTASK, "sub5", "sub5", Status.IN_PROGRESS, 3, 0);
         taskManager.createSubTask(task5);
 
         assertNotNull(taskManager.getTasksByIndex(task1.getId()), "Задача не возвращается.");
@@ -46,7 +44,7 @@ class InMemoryTaskManagerTest {
     @Test
         //Тест проверки равенства экземпляров Tasks.Task с одинаковым Id
     void addNewTask() {
-        Task task = new Task("Test addNewTask", "Test addNewTask description", Status.NEW, 0);
+        Task task = new Task(TasksType.TASK, "Test addNewTask", "Test addNewTask description", Status.NEW, 0);
         final int taskId = taskManager.createTask(task);
 
         final Task savedTask = taskManager.getTasksByIndex(taskId);
@@ -64,7 +62,7 @@ class InMemoryTaskManagerTest {
     @Test
         //Тест проверки равенства экземпляров Tasks.Epic с одинаковым Id
     void addNewEpic() {
-        Epic task2 = new Epic("Test addNewEpic", "Test addNewEpic description", Status.NEW, 0);
+        Epic task2 = new Epic(TasksType.EPIC,"Test addNewEpic", "Test addNewEpic description", Status.NEW, 0);
         final int taskId = taskManager.createEpic(task2);
 
         final Epic savedTask = taskManager.getEpicsByIndex(taskId);
@@ -81,10 +79,10 @@ class InMemoryTaskManagerTest {
 
     @Test
     void addEpicInEpic() { //Тест проверки возможности положить эпик в эпик
-        Epic task3 = new Epic("epic3", "2", Status.NEW, 0);
+        Epic task3 = new Epic(TasksType.EPIC, "epic3", "2", Status.NEW, 0);
         taskManager.createEpic(task3);
 
-        Subtask task4 = new Subtask("sub4", "sub4", Status.NEW, 1, 0);
+        Subtask task4 = new Subtask(TasksType.SUBTASK, "sub4", "sub4", Status.NEW, 1, 0);
         taskManager.createSubTask(task4);
         task3.addSubTaskId(1);
 
@@ -95,21 +93,21 @@ class InMemoryTaskManagerTest {
 
     @Test //Проверка задач с заданным id и задач с сгенерированным id
     void checkTaskWithGeneratedIdAndTaskWithGivenId(){
-        Task task1 = new Task("1", "1", Status.NEW, 0);
+        Task task1 = new Task(TasksType.TASK, "1", "1", Status.NEW, 0);
         taskManager.createTask(task1);
 
-        Task task2 = new Task("2", "2", Status.IN_PROGRESS, 1);
+        Task task2 = new Task(TasksType.TASK,"2", "2", Status.IN_PROGRESS, 1);
         taskManager.createTask(task2);
         assertNotEquals(task1.getId(), task2.getId(), "Неверно задается id.");
     }
 
     @Test //Проверка сохранения истории просмотренных задач
     void checkHistory() {
-        Task task1 = new Task("1", "1", Status.NEW, 0);
+        Task task1 = new Task(TasksType.TASK,"1", "1", Status.NEW, 0);
         taskManager.createTask(task1);
         taskManager.getTasksByIndex(1);
 
-        task1 = new Task("12", "12", Status.IN_PROGRESS, 0);
+        task1 = new Task(TasksType.TASK,"12", "12", Status.IN_PROGRESS, 0);
         taskManager.updateTask(task1, 1);
 
         taskManager.getTasksByIndex(1);

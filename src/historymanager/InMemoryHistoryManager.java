@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 
 public class InMemoryHistoryManager implements HistoryManager {
-   private final HashMap<Integer, Node<Task>> idWithNode = new HashMap<>();
+    private final HashMap<Integer, Node<Task>> idWithNode = new HashMap<>();
 
     private Node<Task> head;
 
@@ -57,7 +57,9 @@ public class InMemoryHistoryManager implements HistoryManager {
     @Override
     public void add(Task task) {
         if (idWithNode.containsKey(task.getId())) {
-            removeNode(idWithNode.remove(task.getId()));
+            removeNode(idWithNode.get(task.getId()));
+        } else {
+
         }
         linkLast(task);
     }

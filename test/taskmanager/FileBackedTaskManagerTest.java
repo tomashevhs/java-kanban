@@ -49,8 +49,7 @@ class FileBackedTaskManagerTest {
 
         fileBackedTaskManager.getTasksByIndex(1);
 
-        fileBackedTaskManager.getTasksByIndex(2);
-        fileBackedTaskManager.getEpicsByIndex(3);
+
     }
 
     @Test

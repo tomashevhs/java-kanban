@@ -48,12 +48,5 @@ class FileBackedTaskManagerTest {
         fileBackedTaskManager.updateTask(task1, 1);
 
         fileBackedTaskManager.getTasksByIndex(1);
-
-
-    }
-
-    @Test
-    void loadFromFile() {
-
     }
 }

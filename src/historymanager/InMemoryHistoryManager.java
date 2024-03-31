@@ -12,21 +12,20 @@ public class InMemoryHistoryManager implements HistoryManager {
     private Node<Task> head;
     private Node<Task> tail;
 
-    public void removeNode(Node<Task> node) {
+    private void removeNode(Node<Task> node) {
         if (node != null) {
-            if (node == tail) {
-                tail = node.prev;
-                node.prev.next = null;
+            if (node == head && node == tail) {
+                head = null;
+                tail = null;
             } else if (node == head) {
                 node.next.prev = null;
                 head = node.next;
-            } else if (node == tail && node == head) {
-                tail = null;
-                head = null;
+            } else if (node == tail) {
+                node.prev.next = null;
+                tail = node.prev;
             } else {
-                node.next.prev = node.prev;
+                node.next.prev= node.prev;
                 node.prev.next = node.next;
-
             }
         }
     }
@@ -56,11 +55,14 @@ public class InMemoryHistoryManager implements HistoryManager {
 
     @Override
     public void add(Task task) {
-        if (idWithNode.containsKey(task.getId())) {
-            removeNode(idWithNode.get(task.getId()));
-        } else {
+        if (task == null) {
             return;
+        } else {
+            if (idWithNode.containsKey(task.getId())) {
+                removeNode(idWithNode.get(task.getId()));
+            }
         }
+
         linkLast(task);
     }
 

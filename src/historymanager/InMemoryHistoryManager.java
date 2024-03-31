@@ -8,11 +8,8 @@ import java.util.HashMap;
 import java.util.List;
 
 public class InMemoryHistoryManager implements HistoryManager {
-    
     private final HashMap<Integer, Node<Task>> idWithNode = new HashMap<>();
-
     private Node<Task> head;
-
     private Node<Task> tail;
 
     public void removeNode(Node<Task> node) {

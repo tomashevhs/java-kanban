@@ -24,7 +24,7 @@ public class InMemoryHistoryManager implements HistoryManager {
                 node.prev.next = null;
                 tail = node.prev;
             } else {
-                node.next.prev= node.prev;
+                node.next.prev = node.prev;
                 node.prev.next = node.next;
             }
         }

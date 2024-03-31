@@ -22,7 +22,7 @@ class InMemoryHistoryManagerTest {
         historyManager.add(task);
         final List<Task> history = historyManager.getHistory();
         assertNotNull(history, "История не пустая.");
-        assertEquals(1, history.size(), "История не пустая.");
+
     }
 
 

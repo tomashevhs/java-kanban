@@ -1,47 +1,44 @@
-import managers.Managers;
+import taskmanager.FileBackedTaskManager;
 import taskmanager.TaskManager;
-import tasks.Epic;
-import tasks.Status;
-import tasks.Subtask;
-import tasks.Task;
+import tasks.*;
 
 public class Main {
     public static void main(String[] args) {
-        TaskManager manager = Managers.getDefault();
 
-        Task task1 = new Task("1", "1", Status.NEW, 0);
-        manager.createTask(task1);
+        FileBackedTaskManager fileBackedTaskManager =  new FileBackedTaskManager();
+        Task task1 = new Task(TasksType.TASK,"1", "1", Status.NEW, 0);
+        fileBackedTaskManager.createTask(task1);
 
-        Task task2 = new Task("2", "2", Status.IN_PROGRESS, 0);
-        manager.createTask(task2);
+        Task task2 = new Task(TasksType.TASK, "2", "2", Status.IN_PROGRESS, 0);
+        fileBackedTaskManager.createTask(task2);
 
-        Epic task3 = new Epic("epic3", "2", Status.NEW, 0);
-        manager.createEpic(task3);
+        Epic task3 = new Epic(TasksType.EPIC,"epic3", "2", Status.NEW, 0);
+        fileBackedTaskManager.createEpic(task3);
 
-        Subtask task4 = new Subtask("sub4", "sub4", Status.NEW, 3, 0);
-        manager.createSubTask(task4);
+        Subtask task4 = new Subtask(TasksType.SUBTASK, "sub4", "sub4", Status.NEW, 3, 0);
+        fileBackedTaskManager.createSubTask(task4);
 
-        Subtask task5 = new Subtask("sub5", "sub5", Status.IN_PROGRESS, 3, 0);
-        manager.createSubTask(task5);
+        Subtask task5 = new Subtask(TasksType.SUBTASK, "sub5", "sub5", Status.IN_PROGRESS, 3, 0);
+        fileBackedTaskManager.createSubTask(task5);
 
-        manager.getTasksByIndex(1);
+        fileBackedTaskManager.getTasksByIndex(1);
 
-        task1 = new Task("1", "1", Status.IN_PROGRESS, 0);
-        task1.setId(10);
-        manager.updateTask(task1, 1);
+        task1 = new Task(TasksType.TASK, "1", "1", Status.IN_PROGRESS, 0);
 
-        manager.getTasksByIndex(1);
+        fileBackedTaskManager.updateTask(task1, 1);
 
-        manager.getTasksByIndex(2);
-        manager.getEpicsByIndex(3);
-        manager.getSubTasksByIndex(4);
-        manager.getSubTasksByIndex(5);
+        fileBackedTaskManager.getTasksByIndex(1);
 
-
+        fileBackedTaskManager.getTasksByIndex(2);
+        fileBackedTaskManager.getEpicsByIndex(3);
+        fileBackedTaskManager.getSubTasksByIndex(4);
+        fileBackedTaskManager.getSubTasksByIndex(5);
 
 
 
-        printAllTasks(manager);
+
+
+
     }
 
     public static void printAllTasks(TaskManager manager) {

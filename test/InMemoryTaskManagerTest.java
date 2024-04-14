@@ -22,7 +22,7 @@ class InMemoryTaskManagerTest {
     void addAllTasks() {
 
         Task task1 = new Task(TasksType.TASK,"1", "1", Status.NEW, 0, Duration.ofMinutes(10),
-                LocalDateTime.of(2023, 3, 17, 17,15));
+                LocalDateTime.of(2023, 3, 17, 17, 15));
 
         taskManager.createTask(task1);
 

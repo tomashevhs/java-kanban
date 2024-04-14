@@ -123,8 +123,8 @@ public class Task {
                 ", id: '" + id + '\'' +
                 ", статус: '" + status +
                 ", время начала: " + getStartTime() + '\'' +
-                ", продолжительность: " + getDuration().toMinutesPart() +'\'' +
-                ", время окончания: " + getEndTime().format(DATE_TIME_FORMATTER) +  "'" + "}";
+                ", продолжительность: " + getDuration().toMinutesPart() + '\'' +
+                ", время окончания: " + getEndTime().format(DATE_TIME_FORMATTER) + "'" + "}";
     }
 
 

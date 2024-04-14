@@ -4,17 +4,26 @@ import historymanager.HistoryManager;
 import tasks.*;
 
 import java.io.*;
+import java.time.Duration;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
 public class FileBackedTaskManager extends InMemoryTaskManager {
+
+    public static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("HH:mm dd.MM.yy");
+
     static String toString(Task task) {
         String str;
         if (task instanceof Subtask) {
-            str = String.format("%d,%s,%s,%s,%s,%d", task.getId(), task.getType(), task.getTitle(), task.getStatus(), task.getDescription(), ((Subtask) task).getEpicId());
+            str = String.format("%d,%s,%s,%s,%s,%d,%s,%s,%s", task.getId(), task.getType(), task.getTitle(), task.getStatus(),
+                    task.getDescription(), ((Subtask) task).getEpicId(), task.getEndTime().format(DATE_TIME_FORMATTER),
+                    task.getDuration().toMinutes(), task.getStartTime().format(DATE_TIME_FORMATTER));
         } else {
-            str = String.format("%d,%s,%s,%s,%s", task.getId(), task.getType(), task.getTitle(),
-                    task.getStatus(), task.getDescription());
+            str = String.format("%d,%s,%s,%s,%s,%d,%s,%s,%s", task.getId(), task.getType(), task.getTitle(),
+                    task.getStatus(), task.getDescription(), task.getEndTime().format(DATE_TIME_FORMATTER),
+                    task.getDuration().toMinutes(), task.getStartTime().format(DATE_TIME_FORMATTER));
         }
         return str;
     }
@@ -26,16 +35,21 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
             switch (split[1]) {
                 case "TASK":
                     task = new Task(TasksType.valueOf(split[1]), split[2], split[4], Status.valueOf(split[3]),
-                            Integer.parseInt(split[0]));
+                            Integer.parseInt(split[0]), Duration.parse(split[5]),
+                            LocalDateTime.parse(split[6], DATE_TIME_FORMATTER));
                     break;
                 case "EPIC":
                     task = new Epic(TasksType.valueOf(split[1]), split[2], split[4], Status.valueOf(split[3]),
-                            Integer.parseInt(split[0]));
+                            Integer.parseInt(split[0]), Duration.parse(split[5]),
+                            LocalDateTime.parse(split[6], DATE_TIME_FORMATTER), LocalDateTime.parse(split[7], DATE_TIME_FORMATTER));
                     break;
                 case "SUBTASK":
                     task = new Subtask(TasksType.valueOf(split[1]), split[2], split[4], Status.valueOf(split[3]),
-                            Integer.parseInt(split[0]), Integer.parseInt(split[5]));
+                            Integer.parseInt(split[0]), Integer.parseInt(split[5]), Duration.parse(split[6]),
+                            LocalDateTime.parse(split[7], DATE_TIME_FORMATTER));
                     break;
+                default:
+                    throw new IllegalStateException("Unexpected value: " + split[1]);
             }
         }
         return task;

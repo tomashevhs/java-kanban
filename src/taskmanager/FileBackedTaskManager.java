@@ -7,6 +7,7 @@ import java.io.*;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,17 +36,17 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
             switch (split[1]) {
                 case "TASK":
                     task = new Task(TasksType.valueOf(split[1]), split[2], split[4], Status.valueOf(split[3]),
-                            Integer.parseInt(split[0]), Duration.parse(split[5]),
+                            Integer.parseInt(split[0]), Duration.of(Long.parseLong(split[5]), ChronoUnit.MINUTES),
                             LocalDateTime.parse(split[6], DATE_TIME_FORMATTER));
                     break;
                 case "EPIC":
                     task = new Epic(TasksType.valueOf(split[1]), split[2], split[4], Status.valueOf(split[3]),
-                            Integer.parseInt(split[0]), Duration.parse(split[5]),
+                            Integer.parseInt(split[0]), Duration.of(Long.parseLong(split[5]), ChronoUnit.MINUTES),
                             LocalDateTime.parse(split[6], DATE_TIME_FORMATTER), LocalDateTime.parse(split[7], DATE_TIME_FORMATTER));
                     break;
                 case "SUBTASK":
                     task = new Subtask(TasksType.valueOf(split[1]), split[2], split[4], Status.valueOf(split[3]),
-                            Integer.parseInt(split[0]), Integer.parseInt(split[5]), Duration.parse(split[6]),
+                            Integer.parseInt(split[0]), Integer.parseInt(split[5]), Duration.of(Long.parseLong(split[6]), ChronoUnit.MINUTES),
                             LocalDateTime.parse(split[7], DATE_TIME_FORMATTER));
                     break;
                 default:

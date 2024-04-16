@@ -22,9 +22,15 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
                     task.getDescription(), ((Subtask) task).getEpicId(), task.getEndTime().format(DATE_TIME_FORMATTER),
                     task.getDuration().toMinutes(), task.getStartTime().format(DATE_TIME_FORMATTER));
         } else {
-            str = String.format("%d,%s,%s,%s,%s,%d,%s,%s,%s", task.getId(), task.getType(), task.getTitle(),
-                    task.getStatus(), task.getDescription(), task.getEndTime().format(DATE_TIME_FORMATTER),
-                    task.getDuration().toMinutes(), task.getStartTime().format(DATE_TIME_FORMATTER));
+            str = String.format("%d,%s,%s,%s,%s,%s,%s,%s",
+                    task.getId(),
+                    task.getType(),
+                    task.getTitle(),
+                    task.getStatus(),
+                    task.getDescription(),
+                    task.getEndTime().format(DATE_TIME_FORMATTER),
+                    task.getDuration().toMinutes(),
+                    task.getStartTime().format(DATE_TIME_FORMATTER));
         }
         return str;
     }

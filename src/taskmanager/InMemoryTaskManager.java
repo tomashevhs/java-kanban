@@ -23,8 +23,8 @@ public class InMemoryTaskManager implements TaskManager {
     protected Set<Task> prioritizedTasksByTime = new TreeSet<>(Comparator.comparing(Task::getStartTime));
     InMemoryHistoryManager inMemoryHistoryManager = (InMemoryHistoryManager) Managers.getDefaultHistory();
 
-    public Set<Task> getPrioritizedTasks() {
-        return new TreeSet<>(prioritizedTasksByTime);
+    public ArrayList<Task> getPrioritizedTasks() {
+        return new ArrayList<>(prioritizedTasksByTime);
     }
 
     private boolean intersectionSearch(Task task1, Task task2) {

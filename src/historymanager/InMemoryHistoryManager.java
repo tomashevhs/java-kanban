@@ -3,14 +3,21 @@ package historymanager;
 
 import tasks.Task;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 public class InMemoryHistoryManager implements HistoryManager {
-    private final HashMap<Integer, Node<Task>> idWithNode = new HashMap<>();
+    private HashMap<Integer, Node<Task>> idWithNode;
     private Node<Task> head;
     private Node<Task> tail;
+
+    public InMemoryHistoryManager(HashMap<Integer, Node<Task>> idWithNode) {
+        this.idWithNode = idWithNode;
+    }
+
+    public InMemoryHistoryManager() {
+
+    }
+
 
     private void removeNode(Node<Task> node) {
         if (node != null) {

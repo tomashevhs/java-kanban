@@ -1,5 +1,8 @@
 package tasks;
 
+import java.time.Duration;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
 public class Task {
@@ -8,13 +11,20 @@ public class Task {
     private String description;
     private Integer id;
     private Status status;
+    public static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("HH:mm dd.MM.yy");
+    private Duration duration;
+    private LocalDateTime startTime;
 
-    public Task(TasksType type, String title, String description, Status status, int id) {
+
+    public Task(TasksType type, String title, String description, Status status, int id, Duration duration,
+                LocalDateTime startTime) {
         this.type = type;
         this.title = title;
         this.description = description;
         this.status = status;
         this.id = id;
+        this.duration = duration;
+        this.startTime = startTime;
     }
 
     public String getTitle() {
@@ -57,6 +67,27 @@ public class Task {
         this.type = type;
     }
 
+    public LocalDateTime getEndTime() {
+        return startTime.plus(duration);
+    }
+
+    public Duration getDuration() {
+        return duration;
+    }
+
+    public void setDuration(Duration duration) {
+        this.duration = duration;
+    }
+
+    public LocalDateTime getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(LocalDateTime startTime) {
+        this.startTime = startTime;
+    }
+
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -90,6 +121,11 @@ public class Task {
         return "Tasks.Task: " + "{" + "Название:'" + title + '\'' +
                 ", описание:'" + description + '\'' +
                 ", id: '" + id + '\'' +
-                ", статус: '" + status + "'" + "}";
+                ", статус: '" + status +
+                ", время начала: " + getStartTime() + '\'' +
+                ", продолжительность: " + getDuration().toMinutesPart() + '\'' +
+                ", время окончания: " + getEndTime().format(DATE_TIME_FORMATTER) + "'" + "}";
     }
+
+
 }

@@ -6,7 +6,7 @@ import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import taskmanager.TaskManager;
 import tasks.Subtask;
-import tasks.Task;
+
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -16,9 +16,11 @@ import java.util.Optional;
 
 public class SubtaskHttpHandler extends BaseHttpHandler implements HttpHandler {
     TaskManager taskManager;
+
     public SubtaskHttpHandler(TaskManager taskManager) {
         this.taskManager = taskManager;
     }
+
     TimeAdapter timeAdapter = new TimeAdapter();
     DurationAdapter durationAdapter = new DurationAdapter();
 
@@ -28,7 +30,6 @@ public class SubtaskHttpHandler extends BaseHttpHandler implements HttpHandler {
             .registerTypeAdapter(LocalDate.class, timeAdapter)
             .registerTypeAdapter(Duration.class, durationAdapter)
             .create();
-
 
     @Override
     public void handle(HttpExchange exchange) throws IOException {
@@ -117,7 +118,7 @@ public class SubtaskHttpHandler extends BaseHttpHandler implements HttpHandler {
         String[] pathParts = exchange.getRequestURI().getPath().split("/");
         try {
             return Optional.of(Integer.parseInt(pathParts[2]));
-        } catch (Exception exception){
+        } catch (Exception exception) {
             return Optional.empty();
         }
     }

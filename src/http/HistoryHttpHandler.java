@@ -4,7 +4,6 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
-import historymanager.HistoryManager;
 import taskmanager.TaskManager;
 
 import java.io.IOException;
@@ -13,6 +12,7 @@ import java.time.LocalDate;
 
 public class HistoryHttpHandler extends BaseHttpHandler implements HttpHandler {
     TaskManager taskManager;
+
     public HistoryHttpHandler(TaskManager taskManager) {
         this.taskManager = taskManager;
     }

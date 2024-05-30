@@ -4,7 +4,6 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
-import historymanager.HistoryManager;
 import taskmanager.TaskManager;
 
 import java.io.IOException;
@@ -13,11 +12,13 @@ import java.time.LocalDate;
 
 public class PrioritizedHttpHandler extends BaseHttpHandler implements HttpHandler {
     TaskManager taskManager;
+
     public PrioritizedHttpHandler(TaskManager taskManager) {
         this.taskManager = taskManager;
     }
 
     TimeAdapter timeAdapter = new TimeAdapter();
+
     DurationAdapter durationAdapter = new DurationAdapter();
 
     Gson gsonTask = new GsonBuilder()

@@ -4,13 +4,14 @@ import java.time.Duration;
 import java.time.LocalDateTime;
 
 public class Subtask extends Task {
-
+    private TasksType type;
     private final int epicId;
 
-    public Subtask(TasksType type, String title, String description, Status status, int epicId, int id,
+    public Subtask(String title, String description, Status status, int epicId, int id,
                    Duration duration, LocalDateTime startTime) {
 
-        super(type, title, description, status, id, duration, startTime);
+        super(title, description, status, id, duration, startTime);
+        this.type = TasksType.SUBTASK;
         this.epicId = epicId;
     }
 
@@ -27,5 +28,10 @@ public class Subtask extends Task {
                 ", время начала: " + getStartTime() + '\'' +
                 ", продолжительность: " + getDuration() + '\'' +
                 ", время окончания: " + getEndTime().format(DATE_TIME_FORMATTER) + "'" + "}";
+    }
+
+    @Override
+    public void setType(TasksType type) {
+        this.type = type;
     }
 }

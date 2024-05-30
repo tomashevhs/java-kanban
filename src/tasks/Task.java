@@ -16,9 +16,9 @@ public class Task {
     private LocalDateTime startTime;
 
 
-    public Task(TasksType type, String title, String description, Status status, int id, Duration duration,
+    public Task(String title, String description, Status status, int id, Duration duration,
                 LocalDateTime startTime) {
-        this.type = type;
+        this.type = TasksType.TASK;
         this.title = title;
         this.description = description;
         this.status = status;

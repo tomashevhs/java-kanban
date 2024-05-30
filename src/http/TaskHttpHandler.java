@@ -5,7 +5,6 @@ import com.google.gson.GsonBuilder;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import taskmanager.TaskManager;
-import tasks.Epic;
 import tasks.Task;
 
 
@@ -120,7 +119,7 @@ public class TaskHttpHandler extends BaseHttpHandler implements HttpHandler {
         String[] pathParts = exchange.getRequestURI().getPath().split("/");
         try {
             return Optional.of(Integer.parseInt(pathParts[2]));
-        } catch (Exception exception){
+        } catch (Exception exception) {
             return Optional.empty();
         }
     }

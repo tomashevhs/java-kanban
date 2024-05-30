@@ -10,7 +10,7 @@ import tasks.Task;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.*;
-import java.util.stream.Collectors;
+
 
 import static tasks.Status.DONE;
 
@@ -41,7 +41,6 @@ public class InMemoryTaskManager implements TaskManager {
         }
     }
 
-
     private void startTimeOfEpic(int epicId) {
         allEpics.get(epicId).setStartTime(getSubTasksIdByEpicId(epicId).stream()
                 .map(Task::getStartTime)
@@ -63,6 +62,7 @@ public class InMemoryTaskManager implements TaskManager {
                 .mapToLong(subTask -> subTask.getDuration().toMinutes())
                 .sum()));
     }
+
     @Override
     public boolean taskComparisonByTime(Task task) {
         Optional<Task> list = getPrioritizedTasks().stream()
@@ -70,6 +70,7 @@ public class InMemoryTaskManager implements TaskManager {
                 .findAny();
         return list.isEmpty();
     }
+
     @Override
     public boolean taskComparisonByTimeDuringUpdate(Task task) {
         Optional<Task> list = getPrioritizedTasks().stream()
@@ -87,7 +88,7 @@ public class InMemoryTaskManager implements TaskManager {
         task.setId(taskId);
 
         if (task.getStartTime() != null) {
-           boolean emptyList = taskComparisonByTime(task);
+            boolean emptyList = taskComparisonByTime(task);
             if (!emptyList) {
                 allTask.put(taskId, task);
                 prioritizedTasksByTime.add(task);

@@ -43,10 +43,12 @@ public class Epic extends Task {
     public void setEndTime(LocalDateTime endTime) {
         this.endTime = endTime;
     }
+
     @Override
     public void setType(TasksType type) {
         this.type = type;
     }
+
     @Override
     public String toString() {
         return "Tasks.Epic: " + "{" + "Название:'" + getTitle() + '\'' +

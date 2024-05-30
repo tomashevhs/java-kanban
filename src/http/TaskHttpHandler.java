@@ -90,7 +90,7 @@ public class TaskHttpHandler extends BaseHttpHandler implements HttpHandler {
             }
         } else {
             Task task = gsonTask.fromJson(new String(exchange.getRequestBody().readAllBytes(), StandardCharsets.UTF_8), Task.class);
-            if (!taskManager.taskComparisonByTimeDuringUpdate(task)) {//сделать проверку пересечений со временем
+            if (!taskManager.taskComparisonByTimeDuringUpdate(task)) {
                 taskManager.createTask(task);
                 String jsonTask = gsonTask.toJson(taskManager.createTask(task));
                 sendText(exchange, jsonTask);

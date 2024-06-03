@@ -10,7 +10,7 @@ import tasks.Task;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.*;
-import java.util.stream.Collectors;
+
 
 import static tasks.Status.DONE;
 
@@ -41,7 +41,6 @@ public class InMemoryTaskManager implements TaskManager {
         }
     }
 
-
     private void startTimeOfEpic(int epicId) {
         allEpics.get(epicId).setStartTime(getSubTasksIdByEpicId(epicId).stream()
                 .map(Task::getStartTime)
@@ -65,16 +64,32 @@ public class InMemoryTaskManager implements TaskManager {
     }
 
     @Override
+    public boolean taskComparisonByTime(Task task) {
+        Optional<Task> list = getPrioritizedTasks().stream()
+                .filter(task1 -> intersectionSearch(task, task1))
+                .findAny();
+        return list.isEmpty();
+    }
+
+    @Override
+    public boolean taskComparisonByTimeDuringUpdate(Task task) {
+        Optional<Task> list = getPrioritizedTasks().stream()
+                .filter(t -> !t.equals(task))
+                .filter(task1 -> intersectionSearch(task, task1))
+                .findAny();
+        return list.isEmpty();
+    }
+
+
+    @Override
     public int createTask(Task task) {
         id = getNextId();
         int taskId = id;
         task.setId(taskId);
 
         if (task.getStartTime() != null) {
-            List<Task> list = getPrioritizedTasks().stream()
-                    .filter(task1 -> intersectionSearch(task, task1))
-                    .collect(Collectors.toList());
-            if (list.isEmpty()) {
+            boolean emptyList = taskComparisonByTime(task);
+            if (!emptyList) {
                 allTask.put(taskId, task);
                 prioritizedTasksByTime.add(task);
             }
@@ -106,10 +121,9 @@ public class InMemoryTaskManager implements TaskManager {
             subTask.setId(id);
             updateEpicStatus(allEpics.get(subTask.getEpicId()));
             if (subTask.getStartTime() != null) {
-                List<Task> list = getPrioritizedTasks().stream()
-                        .filter(task1 -> intersectionSearch(subTask, task1))
-                        .collect(Collectors.toList());
-                if (list.isEmpty()) {
+                boolean emptyList = taskComparisonByTime(subTask);
+
+                if (!emptyList) {
                     allTask.put(id, subTask);
                     allEpics.get(subTask.getEpicId()).addSubTaskId(subTask.getId());
                     prioritizedTasksByTime.add(subTask);
@@ -258,10 +272,8 @@ public class InMemoryTaskManager implements TaskManager {
         task.setId(taskId);
 
         if (task.getStartTime() != null) {
-            List<Task> list = getPrioritizedTasks().stream()
-                    .filter(task1 -> intersectionSearch(task, task1))
-                    .collect(Collectors.toList());
-            if (list.isEmpty()) {
+            boolean emptyList = taskComparisonByTimeDuringUpdate(task);
+            if (!emptyList) {
                 allTask.put(taskId, task);
                 prioritizedTasksByTime.add(task);
             }
@@ -279,10 +291,9 @@ public class InMemoryTaskManager implements TaskManager {
         updateEpicStatus(allEpics.get(epicId));
 
         if (subTask.getStartTime() != null) {
-            List<Task> list = getPrioritizedTasks().stream()
-                    .filter(task1 -> intersectionSearch(subTask, task1))
-                    .collect(Collectors.toList());
-            if (list.isEmpty()) {
+            boolean emptyList = taskComparisonByTimeDuringUpdate(subTask);
+
+            if (!emptyList) {
                 allTask.put(id, subTask);
                 allEpics.get(subTask.getEpicId()).addSubTaskId(subTask.getId());
                 prioritizedTasksByTime.add(subTask);

@@ -8,6 +8,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public interface TaskManager {
+    ArrayList<Task> getPrioritizedTasks();
+
+    boolean taskComparisonByTimeDuringUpdate(Task task);
+
+    boolean taskComparisonByTime(Task task);
+
     int createTask(Task task);
 
     int createEpic(Epic epic);
